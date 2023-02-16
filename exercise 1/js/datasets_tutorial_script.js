@@ -40,7 +40,7 @@ class DataPoint {
         }
         this.x = int(this.duration)*50;
         //print(this.duration);
-        this.y = random(height);
+        this.y = random(height);// this is the line that gave us trouble
         print(this.y);
         noStroke();
         ellipse(this.x, this.y, int(this.duration)*3);
