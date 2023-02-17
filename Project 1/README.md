@@ -16,6 +16,6 @@
 > 
 >Using function(){self.return() within setInterval() in combination with self = this to indicate to the setInterval() function that it needed to run return() every second, modifying the parameters tied to that method identified with the self variable was difficult.
 >
->But understanding that i multipled by angleoffset and passing it through the constructor with a variable named angle, to get different every instance to have a different rotation angle was an even more difficult task.
+>But understanding that i multiplied by angleoffset and passing it through the constructor with a variable named angle, to get different every instance to have a different rotation angle was an even more difficult task.
 >
 >With some help from the C:lab, I got there and mostly understand these concepts. Although, passing a variable through functions in the brackets () is still an issue I struggle to understand overall. The more I use it, the better I understand it, so there's hope for me yet.
