@@ -6,7 +6,6 @@
 // but soon enought hehe ! 
 
 
-
 let cam ; 
 let colorToMatch ;
 let tolerance = 5;  
@@ -28,13 +27,13 @@ function draw () {
     scale(-1,1) ;
     image (cam, 0 , 0, 500,500 ); 
 
-    let firstPx = findColor( cam, colorToMatch, tolerance); 
-if ( firstPx !== undefined) {
+    let firstPixel = findColor( cam, colorToMatch, tolerance); // function to scan the video and find the first pixel of the  color im looking for
+if ( firstPixel !== undefined) {
 
     fill(colorToMatch); 
     stroke (255); 
     strokeWeight (2) ; 
-    circle (firstPx.x , firstPx.y , 30); 
+    circle (firstPixel.x , firstPixel.y , 30); 
 }
 
 }
