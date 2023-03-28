@@ -1,12 +1,30 @@
-# Playful Interaction
+# Playful Interaction - Touch the Targets
 ##### Frederik, Tania. April 2023 
 
 ![](img.png)
 Don't forget to add an image, it really helps us understand your project better. 
 
-This is a project description. Make sure its clear and detailed. It doesn't have to be very formal, but it should be clear and concise. Imagine you've never seen this repository before! 
+We intend to make a sort of dancing game using the camera that has a person wave at targets on the screen as quick as possible to complete the moves in a record time.  
 
 Describe what you've made and how it works, who it is for and why you made it. You may want to include multiple images or drawings or diagrams. Use spell check. 
+
+## Progress notes
+Tania figured out reversing the camera image so movement in front of it is intuitive
+We have both independently figured out color tracking on the camera
+We intend to have 2 targets appear alternatively for our playtest 
+
+
+## to dos (in no particular order)
+commenting the code on color tracking in a concise fashion (I, Fred, will rewatch the tutorial on color Tracking and use it to comment the code better)
+commenting the code on flipping the camera feed
+locking exposure of webcam/ finding & using camera that can have its exposure locked
+leaderboard
+timer
+targets appear on screen and disappear when "hit" (do with OOT)
+title screen
+sfx
+
+
 
 ## Installation
 Here, you'll describe how to run your code. Do you have libraries? Do you need to configure something? Make it clear, provide inks and commands. 
