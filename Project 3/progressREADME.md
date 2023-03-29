@@ -15,6 +15,7 @@ We intend to have 2 targets appear alternatively for our playtest
 
 
 ## to dos (in no particular order)
+we need to figure out how the color detection will work with the ASCII filter, given that such a filter turns everything to B&W. maybe the filter is activated when we calibrate with mouse click/ when we press a key, and the p5 color tracks the colored image, but we only see the filtered image
 commenting the code on color tracking in a concise fashion (I, Fred, will rewatch the tutorial on color Tracking and use it to comment the code better)
 commenting the code on flipping the camera feed
 locking exposure of webcam/ finding & using camera that can have its exposure locked
