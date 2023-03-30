@@ -24,6 +24,7 @@ timer
 targets appear on screen and disappear when "hit" (do with OOT)
 title screen
 sfx
+another idea: when a target appears, theres a timer that starts (not shown to the player) and depending on how long it takes for the player to "touch" the target, text appears and disappear real quick, saying either "GREAT!" or "MISS..." like those rhythm games where the game gives you feedback on the timing of your inputs with little text like that.
 
 
 
