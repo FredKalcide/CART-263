@@ -11,7 +11,8 @@ Describe what you've made and how it works, who it is for and why you made it. Y
 ## Progress notes
 Tania figured out reversing the camera image so movement in front of it is intuitive
 We have both independently figured out color tracking on the camera
-We intend to have 2 targets appear alternatively for our playtest 
+We intend to have 2 targets appear alternatively for our playtest
+Done, 2 targets appear alteratively when the color being searched for appears around them
 
 
 ## to dos (in no particular order)
