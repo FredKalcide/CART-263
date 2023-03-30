@@ -14,6 +14,16 @@ We have both independently figured out color tracking on the camera
 We intend to have 2 targets appear alternatively for our playtest
 Done, 2 targets appear alteratively when the color being searched for appears around them
 
+Questions i have and need to figure out : 
+
+Will an ascii filter would slow down the game or maybe crash it ?
+
+Can we implement color tracking inside of an ascii filter ?
+
+Should we do ascii targets also ? 
+
+Im having a lot of trouble regarding the sizing of the webcam - canvas - filter ... will have to play around with that. 
+
 
 ## to dos (in no particular order)
 we need to figure out how the color detection will work with the ASCII filter, given that such a filter turns everything to B&W. maybe the filter is activated when we calibrate with mouse click/ when we press a key, and the p5 color tracks the colored image, but we only see the filtered image
