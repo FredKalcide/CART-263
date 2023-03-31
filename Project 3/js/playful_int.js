@@ -3,7 +3,7 @@
 
 let cam;
 let colorToFind;
-let colorrange = 12
+let colorrange = 20
 let step = 0 // used for triggering the apparition of all targets
 let currentTimeElapsed;
 let keyToStart = 0 // using this to start the game on a key press
@@ -125,7 +125,7 @@ class Target {
         this.notiftextb;
         this.notiftextstrokeweight = 3
         this.notiftextop = 255
-        this.textsize = 30
+        this.textsize = 200
     }
 
     drawTarget1(){
@@ -179,7 +179,7 @@ class Target {
 
 
         if (hitTimer < 2000){
-            stroke(this.notiftextr, this.notiftextg,this.notiftextb, this.notiftextop)
+            stroke(this.notiftextr, this.notiftextg,this.notiftextb, this.notiftextop, )
             text(this.notiftext, this.notifX, this.notifY)
             // // // // // the text is also mirrored, gotta fix that
             this.notiftextop -= 20

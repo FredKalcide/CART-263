@@ -30,7 +30,8 @@ we need to figure out how the color detection will work with the ASCII filter, g
 commenting the code on color tracking in a concise fashion (I, Fred, will rewatch the tutorial on color Tracking and use it to comment the code better)
 commenting the code on flipping the camera feed
 locking exposure of webcam/ finding & using camera that can have its exposure locked
-leaderboard
+leaderboard: need to have a global timer that starts when the game is started with a key press, ends when the last target is hit, and stores said time in an array only if the time is lesser than the lowest time (lowest value) already in the array, and display five times. thus, the highest time is booted out of the array if it is higher than all other five times 
+
 timer
 targets appear on screen and disappear when "hit" (do with OOT)
 title screen
