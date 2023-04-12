@@ -69,7 +69,7 @@ function setup(){
 
 function button(x, y, w, h, pageSwitch, txt, txtSize) { // holds the info about buttons ( color, stroke size)
   
-  stroke(0,143,17);
+  stroke(0,255,17);
   noFill(); 
 
   if (mouseX > x && mouseX < x + w) {
@@ -95,7 +95,7 @@ function button(x, y, w, h, pageSwitch, txt, txtSize) { // holds the info about 
 
 function draw(){
   
-  background(0);
+  background(20);
 
   textAlign(CENTER, CENTER);
 
@@ -143,7 +143,31 @@ function draw(){
 function play(){
       translate (width, 0);
     scale(-1,1) ;
-    image(cam, 0, 0, 640, 400)
+   // image(cam, 0, 0, 640, 400)
+  
+  background(0,143,17);
+
+  
+  let gridSize = 10
+
+  // makes the video have pixels
+  cam.loadPixels();
+  for (let y=0; y<cam.height; y+=gridSize) {
+    for (let x=0; x<cam.width; x+=gridSize) {
+      
+      // at the current position, get the red value and use to create diameter
+  
+      let index = (y * cam.width + x) * 4;
+      let r = cam.pixels[index];
+      let dia = map(r, 0,255, gridSize,26);
+      
+      // draw a circle at the current location, using the diameter
+    
+      fill(20);
+      noStroke();
+      circle(x+gridSize/2,y+gridSize/2, dia);
+    }
+  }
   
 //let firstPx = findColor(cam, colorToFind, colorrange) // this variable is used to have an x and y position to attach to something when the color we want is found
 if (keyToStart === 1){
@@ -300,4 +324,3 @@ class Target {
 
     }
 }
-
