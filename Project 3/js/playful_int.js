@@ -1,6 +1,12 @@
 //i figured we could use the mousePressed as a calibration tool. so basically. we have ppl wear a red piece of paper on their hands,
 // and calibrate the findColor fx to look for that red by clicking on it! its simple and it works. we can do it with ppls hands too and just use the red as backup if the color tracking gets weird with skin tones
 
+let b ; 
+var scene = "home";
+var clicked = false ; 
+var page = "home";
+
+
 let cam;
 let colorToFind;
 let colorrange = 20
@@ -23,8 +29,37 @@ let ymaxthresh;
 
 
 
+function mouseClicked (){
+  
+  clicked = true ; 
+  
+  
+}
+
 function setup(){
-    createCanvas(640, 400);
+   createCanvas(640, 400);
+  
+    b = 0 ; 
+  
+  switch (scene) { // elements that let us switch pages/scene from menu to game or instructions etc 
+    case "home":
+      background(255, 0, 0);
+      break;
+
+    case "how":
+      background(0, 255, 0);
+      break;
+
+    case "howtoplay":
+      background(0);
+      break;
+      
+       case "instructions":
+      background(0);
+      break;
+      
+  }
+  
     Targets = new Target // assigning the target object to a variable
     cam = createCapture(VIDEO);
     cam.size(640, 400);
@@ -32,10 +67,81 @@ function setup(){
     colorToFind = color(255, 200, 0);
 }
 
+function button(x, y, w, h, pageSwitch, txt, txtSize) { // holds the info about buttons ( color, stroke size)
+  
+  stroke(0,143,17);
+  noFill(); 
+
+  if (mouseX > x && mouseX < x + w) {
+    if (mouseY > y && mouseY < y + w) { // if cursor of the mouse over over, change the color for cue indication
+      
+     noStroke();
+      fill(0,0,139);
+
+      if (clicked) {
+        page = pageSwitch;
+      }
+    }
+  }
+  //rect(x, y, w, h);
+  
+  //fill(255, 255, 255);
+   textFont ('Courier Prime')
+ // textFont(matrix);
+  textSize(txtSize);
+  text(txt, x + w / 2, y + h / 2);
+}
+
 
 function draw(){
   
-    translate (width, 0);
+  background(0);
+
+  textAlign(CENTER, CENTER);
+
+  switch (page) {
+      
+      case "home":
+    
+      button(width/2-50, 70, 92, 65, "help", "function Welcome (){ ", 30);
+
+      button(width/2-50, 50+100, 92, 65, "play", "Play.go", 30);
+      
+       button (width/2, 110+100, 70, 50 , "howtoplay",  "howToPlay.go", 30); 
+      
+       button(width/2+12, 170+100, 70, 50, "endgame", "viewScore.go } ", 30);
+
+      break;
+
+    case "play":
+      play(); 
+      break;
+
+    case "instructions":
+  
+      instructions(); 
+      
+      break;
+      
+      
+      case "endgame":
+      
+      background (255,255,0); 
+    //  drawend(); 
+   
+      break ; 
+      
+      
+   
+  }
+  
+  
+ clicked = false ; 
+
+}
+
+function play(){
+      translate (width, 0);
     scale(-1,1) ;
     image(cam, 0, 0, 640, 400)
   
@@ -56,7 +162,7 @@ Targets.greatNotif()
 }*/
 
 
-
+  
 }
 
 function keyPressed(){ //using keyPressed to start the game
