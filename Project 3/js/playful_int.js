@@ -1,6 +1,10 @@
 //i figured we could use the mousePressed as a calibration tool. so basically. we have ppl wear a red piece of paper on their hands,
 // and calibrate the findColor fx to look for that red by clicking on it! its simple and it works. we can do it with ppls hands too and just use the red as backup if the color tracking gets weird with skin tones
 
+// make sure that the images and font are downloaded !!
+let img ; 
+let myfont; 
+
 let b ; 
 var scene = "home";
 var clicked = false ; 
@@ -28,6 +32,16 @@ let yminthresh;
 let ymaxthresh;
 
 
+function preload (){
+  myfont = loadFont ('myfont.ttf'); 
+  
+  print('loaded'); 
+  img = loadImage('img.jpg'); 
+  print('loadedimg');
+  
+  
+}
+
 
 function mouseClicked (){
   
@@ -43,7 +57,7 @@ function setup(){
   
   switch (scene) { // elements that let us switch pages/scene from menu to game or instructions etc 
     case "home":
-      background(255, 0, 0);
+      background(0, 0, 0);
       break;
 
     case "how":
@@ -69,14 +83,17 @@ function setup(){
 
 function button(x, y, w, h, pageSwitch, txt, txtSize) { // holds the info about buttons ( color, stroke size)
   
+  textFont('myfont'); 
   stroke(0,255,17);
-  noFill(); 
+  fill(255); 
 
   if (mouseX > x && mouseX < x + w) {
     if (mouseY > y && mouseY < y + w) { // if cursor of the mouse over over, change the color for cue indication
       
-     noStroke();
+    stroke(0,0,139); 
       fill(0,0,139);
+      
+      
 
       if (clicked) {
         page = pageSwitch;
@@ -86,7 +103,7 @@ function button(x, y, w, h, pageSwitch, txt, txtSize) { // holds the info about 
   //rect(x, y, w, h);
   
   //fill(255, 255, 255);
-   textFont ('Courier Prime')
+   textFont (myfont);
  // textFont(matrix);
   textSize(txtSize);
   text(txt, x + w / 2, y + h / 2);
@@ -96,7 +113,8 @@ function button(x, y, w, h, pageSwitch, txt, txtSize) { // holds the info about 
 function draw(){
   
   background(20);
-
+    tint(120, 255); // diminish the opacity of the image 
+image(img,0,0);
   textAlign(CENTER, CENTER);
 
   switch (page) {
@@ -107,7 +125,7 @@ function draw(){
 
       button(width/2-50, 50+100, 92, 65, "play", "Play.go", 30);
       
-       button (width/2, 110+100, 70, 50 , "howtoplay",  "howToPlay.go", 30); 
+       button (width/2, 110+100, 70, 50 , "drawhowtoplay",  "howToPlay.go", 30); 
       
        button(width/2+12, 170+100, 70, 50, "endgame", "viewScore.go } ", 30);
 
@@ -117,9 +135,10 @@ function draw(){
       play(); 
       break;
 
-    case "instructions":
-  
-      instructions(); 
+    case "drawhowtoplay":
+      
+    
+      drawhowtoplay(); 
       
       break;
       
@@ -138,6 +157,31 @@ function draw(){
   
  clicked = false ; 
 
+}
+
+ function drawhowtoplay (){
+  
+  background(0);
+   
+   
+   button(36,342,70,50,"home", "<- back", 30);
+   stroke(0,255,17);
+  fill(255); 
+  textFont (myfont);
+  textSize(30); 
+  //textAlign(CENTER,CENTER);
+  
+  
+  text('. . . hello there ',170 , 40);
+  textSize (20)
+  text('We know that life can get pretty wild out there . . .', 400, 130); 
+  text('Test out your reflexes with this game', 342,155); 
+  text('Targets will appear on screen . . .' , 331,180); 
+  text('make sure to click on them as quickly as possible !', 392, 205); 
+  
+  textSize(18);
+  text ('know that you can always be faster . . .', 475, 376); 
+  
 }
 
 function play(){
