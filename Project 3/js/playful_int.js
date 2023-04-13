@@ -2,6 +2,8 @@
 // and calibrate the findColor fx to look for that red by clicking on it! its simple and it works. we can do it with ppls hands too and just use the red as backup if the color tracking gets weird with skin tones
 
 // make sure that the images and font are downloaded !!
+let onclick ; 
+
 let img ; 
 let myfont; 
 
@@ -39,6 +41,8 @@ function preload (){
   img = loadImage('img.jpg'); 
   print('loadedimg');
   
+  onclick = loadSound ('onclick.wav'); 
+  print('done');
   
 }
 
@@ -47,6 +51,7 @@ function mouseClicked (){
   
   clicked = true ; 
   
+  onclick.play(); 
   
 }
 
@@ -121,13 +126,13 @@ image(img,0,0);
       
       case "home":
     
-      button(width/2-50, 70, 92, 65, "help", "function Welcome (){ ", 30);
+      button(width/2-50, 26, 92, 65, "help", "function Welcome (){ ", 30);
 
-      button(width/2-50, 50+100, 92, 65, "play", "Play.go", 30);
+      button(width/2-50, 50+110, 92, 65, "play", "Play.go", 30);
       
-       button (width/2, 110+100, 70, 50 , "drawhowtoplay",  "howToPlay.go", 30); 
+       button (width/2, 110+190, 70, 50 , "drawhowtoplay",  "howToPlay.go }", 30); 
       
-       button(width/2+12, 170+100, 70, 50, "endgame", "viewScore.go } ", 30);
+       
 
       break;
 
