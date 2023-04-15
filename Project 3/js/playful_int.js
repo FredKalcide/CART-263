@@ -4,6 +4,8 @@
 // make sure that the images and font are downloaded !!
 let onclick ; 
 
+let timer =  0 ;  
+
 let img ; 
 let myfont; 
 
@@ -192,10 +194,20 @@ image(img,0,0);
 function play(){
   
    // image(cam, 0, 0, 640, 400)
-  
+  if (frameCount % 60 == 0 && timer < 60) { // if the frameCount is divisible by 60, then a second has passed. it will stop at 0
+    timer ++;
+    
+  }
   background(0,143,17);
 
   
+   if ( timer === 60 ){ // if the game as been played for 1 minute // endgame 
+  
+         endpage(); 
+   //  textSize(50);
+  //  stroke(255,255,0); 
+ //text("gameover", width/2, height*0.7); 
+  }
   let gridSize = 10
 
   // makes the video have pixels
@@ -234,6 +246,27 @@ Targets.greatNotif()
 }*/
 
 
+  
+}
+
+function endpage(){
+
+  capture.remove(); // remove the DOM element created by p5
+  cam.stop(); 
+  thankyoupage(); 
+
+  
+}
+
+function thankyoupage(){
+  
+  
+    background(0); 
+   stroke(0,255,17);
+  fill(255); 
+  textFont (myfont);
+  textSize(50); 
+  text('THE END', width/2, height/2 ); 
   
 }
 
