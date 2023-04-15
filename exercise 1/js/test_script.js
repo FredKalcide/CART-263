@@ -1,4 +1,4 @@
-"use strict";
+/*"use strict";
 
 
 let table; 
@@ -20,3 +20,5 @@ function setup() {
         }   
     } 
 }
+*/
+

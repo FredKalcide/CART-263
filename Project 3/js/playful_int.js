@@ -190,8 +190,7 @@ image(img,0,0);
 }
 
 function play(){
-      translate (width, 0);
-    scale(-1,1) ;
+  
    // image(cam, 0, 0, 640, 400)
   
   background(0,143,17);
