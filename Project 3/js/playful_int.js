@@ -1,6 +1,5 @@
-//i figured we could use the mousePressed as a calibration tool. so basically. we have ppl wear a red piece of paper on their hands,
-// and calibrate the findColor fx to look for that red by clicking on it! its simple and it works. we can do it with ppls hands too and just use the red as backup if the color tracking gets weird with skin tones
-
+//Tania & Frederik - BREAK THE FIREWALL 
+//consult the visuals&logic and logic sketches for Tania and Fred's (mostly) separate works, respectively
 // make sure that the images and font are downloaded !!
 let onclick ; 
 
@@ -137,7 +136,7 @@ image(img,0,0, 640, 400);
       
       case "home":
     
-      button(width/2-50, 26, 92, 65, "help", "function Welcome (){ ", 30);
+      button(width/2-50, 26, 92, 65, "help", "function Break the FIREWALL (){ ", 30);
 
       button(width/2-50, 50+110, 92, 65, "play", "Play.go", 30);
       
@@ -174,13 +173,14 @@ image(img,0,0, 640, 400);
  clicked = false ; 
 
   //score tracker
-  if (points === 1){
-    text (points + ' point', width/2, height - 20 )
-
-}
-else{
-    text (points + ' points', width/2, height - 20 )
-}
+  if (keyToStart === 1){
+    if (points === 1){
+      text (points + ' point', width/2, height - 20 )
+    }
+    else{
+      text (points + ' points', width/2, height - 20 )
+    }
+  }
 
 
 
@@ -205,7 +205,8 @@ else{
   text('We know that being a computer wizz can be rough . . .', 400, 130); 
   text('So test out your hacking skills!', 342,155); 
   text('Targets will appear on screen . . .' , 331,180); 
-  text('make sure to click on them as quickly as possible to get through the firewall !', 392, 205); 
+  text('make sure to click on them as quickly as possible ', 392, 205);
+  text('to get through the firewall !', 392, 230) 
   
   textSize(18);
   text ('know that you can always be faster . . .', 475, 376); 

@@ -1,14 +1,29 @@
 # Playful Interaction - Touch the Targets
 ##### Frederik, Tania. April 2023 
 
-![](img.png)
-Don't forget to add an image, it really helps us understand your project better. 
+![first screen the player encounters in the game](assets/images/homescreen.jpg)
+
 
 We intend to make a sort of dancing game using the camera that has a person wave at targets on the screen as quick as possible to complete the moves in a record time.  
 
-Describe what you've made and how it works, who it is for and why you made it. You may want to include multiple images or drawings or diagrams. Use spell check. 
+In the end, the camera and color detection proved too unreliable for us to do something reliable with them, so we settled for a "touch the targets" on the screen type game, instead of with the camera as the input device. The intended audience is just about anybody. The one second time frame to touch the targets feels short enough to be challenging, but long enough to be approachable by a wide variety of players. 
+
+Tania did make use of color tracking in a smaller format, in the play function, to generate a filter for the displayed camera image. In the end, this shift in use of the color finding ability of p5 served our final vision better without making us completely discard the camera or color detection.
+
+![instructions for playing](assets/images/howto.jpg)
+
+![the playing screen](assets/images/playscreen.jpg)
+
+![a video of Fred playing the game](assets/images/play.mp4)
+
+![the end screen of the game](assets/images/endscreen.jpg)
+
+![a diagram and some questions we had for audiences during our playtest](assets/images/playtest_diagram.jpg)
+
+
 
 ## Progress notes
+
 Tania figured out reversing the camera image so movement in front of it is intuitive
 We have both independently figured out color tracking on the camera
 We intend to have 2 targets appear alternatively for our playtest
@@ -24,8 +39,11 @@ Should we do ascii targets also ?
 
 Im having a lot of trouble regarding the sizing of the webcam - canvas - filter ... will have to play around with that. 
 
+I've (Fred) tried it all, and finally got the text to work in my logic file but things are still laggy when the code is merged, i must've missed something, but time is up
 
-## to dos (in no particular order)
+
+### to dos (in no particular order)
+
 we need to figure out how the color detection will work with the ASCII filter, given that such a filter turns everything to B&W. maybe the filter is activated when we calibrate with mouse click/ when we press a key, and the p5 color tracks the colored image, but we only see the filtered image
 commenting the code on color tracking in a concise fashion (I, Fred, will rewatch the tutorial on color Tracking and use it to comment the code better)
 commenting the code on flipping the camera feed
@@ -40,36 +58,42 @@ another idea: when a target appears, theres a timer that starts (not shown to th
 
 Also, it would be interesting and satisfying to maybe add some sounds or music in some sort since it is a game so that we could give some dopamine reward to the player in the game. Maybe creating some sounds with oscillators etc .. 
 
-I would maybe like for the targets to appear as small little points, ( particle systems maybe)  or that the target is actually made of the ascii symbols but that a given region become of a certain other color and shape ( lets say a red circle )  when the curser goes on it ( the player hand movement ), it collides with it and makes the ascii target collide,  explode  a little and disappear so that it then reappers a second later to it's initial default font and color 
+I would maybe like for the targets to appear as small little points, ( particle systems maybe)  or that the target is actually made of the ascii symbols but that a given region become of a certain other color and shape ( lets say a red circle )  when the curser goes on it ( the player hand movement ), it collides with it and makes the ascii target collide,  explode  a little and disappear so that it then reappears a second later to it's initial default font and color 
 
-
-wanted to, using keycodes, set keys to start and reset the game. one key sets keytostart to 0, thus when it turns to 1 again the whole code runs back from the beginning
-
-wanted to map the alpha value of the text notificatons to the y position, so that as it rises, it fades out
 
 ## Installation
-Here, you'll describe how to run your code. Do you have libraries? Do you need to configure something? Make it clear, provide inks and commands. 
-``` You can add code like this if needed  ``` 
 
-Users should be able to copy/paste the code and run it in the terminal or copy the URL and download what they need. 
+no install needed, just click play, and then press any key to begin!
 
-If you need to edit code to make it work, like commenting out or running specific lines for certain features, you can detail it here. 
 
 ## Run
-How to run your code? If there is a command, write it. Does the browser need to be resized? Do you need to connect a microphone? Tell us!
 
-The code runs on a local server, as of now we only need a webcam and we would figure out color detection. We thought about using a kinnect, but we wanted to try to figure out if we can do it on webcam first before going on to to complex for our level of knowledge.  
+The code runs on a local server, as of now we only need a webcam and we would need to figure out color detection. We thought about using a kinect, but we wanted to try and see if we could do it on webcam first before going on to make it more complex, for our level of knowledge.  
 
-If your work needs a physical setup or other hardware, describe it here, or give us a diagram.
+
 
 ## Future iterations
+
 What do you hope to add in the future and what did you not have time for? 
-I would like for the targets to appear as small little points, ( particle systems maybe)  or that the target is actually made of the ascii symbols but that a given region become of a certain other color and shape ( lets say a red circle )  when the curser goes on it ( the player hand movement ), it collides with it and makes the ascii target collide,  explode  a little and disappear so that it then reappers a second later to it's initial default font and color 
 
+I (Tania) would like for the targets to appear as small little points, ( particle systems maybe)  or that the target is actually made of the ascii symbols but that a given region become of a certain other color and shape ( lets say a red circle )  when the curser goes on it ( the player hand movement ), it collides with it and makes the ascii target collide,  explode  a little and disappear so that it then reappears a second later to it's initial default font and color 
 
-## Sketches, ideas
-Include any sketches, mood boards, or ideas you went through. Explain them clearly.
-here is one example of an Ascii portrait I made in the console which i would like to use as filter, insparion for the project 
+Obviously, we want to test out the target detection with the camera and color detection, as was originally intended. We think a camera with locked exposure would be a good starting point for that
+
+We wanted particle effects but ran out of time as well.
+
+Wanted to, using keycodes, set keys to start and reset the game. one key sets keytostart to 0, thus when it turns to 1 again the whole code runs back from the beginning
+
+Wanted to map the alpha value of the text notificatons to the y position, so that as it rises, it fades out
+
+Would love to add more to the background, complexify the filter, add more sound effects and mostly spice up the gameplay with extra challenges. maybe a power up that slows down the apparition of targets, or maybe targets that flee the mouse when they appear for a certain time. 
+Leaning into the premise of the game harder is really what we regret not having the time for.
+
+What is there to want but more? That being said, this will have to suffice for now. i, Fred, am pretty proud of what we accomplished here, especially given my lack of experience, this has been tough, but i've learned a lot about OOP and how to organize projects so as to have them be more easily edited and corrected. This course has set me on a path of learning for coding and i cant wait to get back to more personal projects in my free time!
+
+### Sketches, ideas
+
+Here is one example of an Ascii portrait I (Tania) made in the console which i would like to use as a filter, inspiration for the project:
 999$99898998888889999988999999998$#$8666531!bccc
 788988888999899899999988899899999$W97666531!bc;;
 5566666778899999998899999987899999987665531!bc;;
@@ -128,10 +152,9 @@ target video game example : https://matchmaker.merci-michel.com/
 ## Credits, resources, etc 
 We used a tutorial on color tracking from Youtube, to get some webcam tracking. CP2: Object Detection – Webcam Tracking in p5.js/TensorFlow! From jeff Thompson. 
 As for AScii aesthetic I am currently exploring and experimenting with the aid of the coding train's tutorial by Daniel Shiffman which is the coding challenge 166 ; Ascii text images. 
-## Anything else? 
-Add it!
 
-## Notes on code comments and documentation
+
+#### Notes on code comments and documentation
 
 Documentation is a critical part of writing code. It is for you, but also for others you might want to share your code with. If you have ever used code written by someone else, think about what they could have done to help you understand it better. If you're proud of your code, documenting it can help others learn.
 
