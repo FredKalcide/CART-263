@@ -70,7 +70,7 @@ no install needed, just click play, and then press any key to begin!
 
 The code runs on a local server, as of now we only need a webcam and we would need to figure out color detection. We thought about using a kinect, but we wanted to try and see if we could do it on webcam first before going on to make it more complex, for our level of knowledge.  
 
-
+the hit detection did break somewhat during the merge and i (Fred) cannot repair it again (both out of time and patience) but the logic in the logic sketch showcases how it should run better
 
 ## Future iterations
 
