@@ -43,6 +43,10 @@ Also, it would be interesting and satisfying to maybe add some sounds or music i
 I would maybe like for the targets to appear as small little points, ( particle systems maybe)  or that the target is actually made of the ascii symbols but that a given region become of a certain other color and shape ( lets say a red circle )  when the curser goes on it ( the player hand movement ), it collides with it and makes the ascii target collide,  explode  a little and disappear so that it then reappers a second later to it's initial default font and color 
 
 
+wanted to, using keycodes, set keys to start and reset the game. one key sets keytostart to 0, thus when it turns to 1 again the whole code runs back from the beginning
+
+wanted to map the alpha value of the text notificatons to the y position, so that as it rises, it fades out
+
 ## Installation
 Here, you'll describe how to run your code. Do you have libraries? Do you need to configure something? Make it clear, provide inks and commands. 
 ``` You can add code like this if needed  ``` 

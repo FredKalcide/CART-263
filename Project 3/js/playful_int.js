@@ -4,7 +4,7 @@
 // make sure that the images and font are downloaded !!
 let onclick ; 
 
-let timer =  0 ;  
+let timer;  
 
 let img ; 
 let myfont; 
@@ -22,8 +22,17 @@ let step = 0 // used for triggering the apparition of all targets
 let currentTimeElapsed;
 let keyToStart = 0 // using this to start the game on a key press
 
+let mousepress = 0
+let screentouch = 0
+let mousepresstonotif = 0
+let opacity = 255
+let great = 0
+let misstime = 0
+let misslocation = 0
+
 let hitTimer; //the timer that determines if a target hit is fast or not, displaying text appropriately  
 
+let points = 0 // keeping track of score
 
 // object variables
 let Targets
@@ -121,7 +130,7 @@ function draw(){
   
   background(20);
     tint(120, 255); // diminish the opacity of the image 
-image(img,0,0);
+image(img,0,0, 640, 400);
   textAlign(CENTER, CENTER);
 
   switch (page) {
@@ -164,6 +173,18 @@ image(img,0,0);
   
  clicked = false ; 
 
+  //score tracker
+  if (points === 1){
+    text (points + ' point', width/2, height - 20 )
+
+}
+else{
+    text (points + ' points', width/2, height - 20 )
+}
+
+
+
+
 }
 
  function drawhowtoplay (){
@@ -181,10 +202,10 @@ image(img,0,0);
   
   text('. . . hello there ',170 , 40);
   textSize (20)
-  text('We know that life can get pretty wild out there . . .', 400, 130); 
-  text('Test out your reflexes with this game', 342,155); 
+  text('We know that being a computer wizz can be rough . . .', 400, 130); 
+  text('So test out your hacking skills!', 342,155); 
   text('Targets will appear on screen . . .' , 331,180); 
-  text('make sure to click on them as quickly as possible !', 392, 205); 
+  text('make sure to click on them as quickly as possible to get through the firewall !', 392, 205); 
   
   textSize(18);
   text ('know that you can always be faster . . .', 475, 376); 
@@ -193,21 +214,18 @@ image(img,0,0);
 
 function play(){
   
-   // image(cam, 0, 0, 640, 400)
-  if (frameCount % 60 == 0 && timer < 60) { // if the frameCount is divisible by 60, then a second has passed. it will stop at 0
-    timer ++;
-    
-  }
+   
   background(0,143,17);
 
-  
-   if ( timer === 60 ){ // if the game as been played for 1 minute // endgame 
+  timer = millis()
+   if ( timer >= 60000 ){ // if the game as been played for 1 minute // endgame 
   
          endpage(); 
    //  textSize(50);
   //  stroke(255,255,0); 
  //text("gameover", width/2, height*0.7); 
   }
+  print (timer)
   let gridSize = 10
 
   // makes the video have pixels
@@ -229,21 +247,17 @@ function play(){
     }
   }
   
-//let firstPx = findColor(cam, colorToFind, colorrange) // this variable is used to have an x and y position to attach to something when the color we want is found
-if (keyToStart === 1){
-Targets.drawTarget1();
+if (keyToStart === 1){//starting the game
+    Targets.drawTarget();
+    createVector() //to only use drawtarget here, when loading the page
 }
-// calling our target object's other methods, they are ready to run once the first does
-Targets.drawTarget2();
-Targets.greatNotif()
 
-/*if (firstPx !== undefined){ // draw a circle filled with the color being searched for on the pixel that color is found in.
-    fill(colorToFind)
-    stroke (0);
-    strokeWeight(2);
-    ellipse(firstPx.x, firstPx.y, 30)
-    print ("color found in lower right")
-}*/
+// calling our target object's other methods, they are ready to run once the first does
+if (mousepresstonotif === 1){// trigger the notifications once the mouse is pressed. this needs to be in draw so that the opacity of the text can change over time
+    Targets.textgreatnotif()
+    Targets.textmissnotif()
+}
+
 
 
   
@@ -251,7 +265,7 @@ Targets.greatNotif()
 
 function endpage(){
 
-  capture.remove(); // remove the DOM element created by p5
+  cam.remove(); // remove the DOM element created by p5
   cam.stop(); 
   thankyoupage(); 
 
@@ -271,137 +285,193 @@ function thankyoupage(){
 }
 
 function keyPressed(){ //using keyPressed to start the game
-    currentTimeElapsed = millis() // the key press triggers the storage of the current value of millis, thus the amount of time that has passed
-   // // // // // we need to have each hit of a target trigger the storage of the current elapsed time, so that it then can be subtracted from the value of millis thats constantly updated in draw, that will fix the "GREAT" / "MISS" text buggyness
-    currentTimeElapsed; //calling millis
-    print(currentTimeElapsed)
-    keyToStart = 1 // starting the game
-    // // // // //using keycodes, we can set keys to start and reset the game. like, one key sets key to start to 0, thus when it turns to 1 again the whole code runs back from the beginning
-}
+  currentTimeElapsed = millis() // the key press triggers the storage of the current value of millis, thus the amount of time that has passed, allowing the timer for how quickly the player presses on the first target to begin
+  currentTimeElapsed; //calling millis
+  
+  keyToStart = 1 // starting the game
+  Targets.randomizer()
+  }
 
 function mousePressed(){
-    loadPixels();
-    colorToFind = get(mouseX, mouseY) // the color of whatever pixel is clicked on is set to be the new color to be found. used for calibrating the color tracking to the hands of players
-}
+ 
+    mousepresstonotif = 1//activating the notification 
 
-function findColor(input, c, range){
+    mousepress++ //activating the target detection
+    screentouch ++//activating the target detection on touch
+    
 
-if (input.width === 0 || input.height === 0){
-    return undefined
-}
-
-    let matchR = c[0];
-    let matchG = c[1];
-    let matchB = c[2];
-
-
-    input.loadPixels();
-    for (let y = 0; y < input.height; y++){ // running for loops to look through every pixel, like looking through a grid, for every vertical position, we then check every x position
-        for(let x = 0; x < input.width; x++){
-
-            let index = (y * cam.width + x) * 4
-           
-            let r = cam.pixels[index];
-            let g = cam.pixels[index+1];
-            let b = cam.pixels[index+2];
-          
-                if (r >= matchR - range && r <= matchR + range && // searching for the color to match to, within the section of the screen we want. the values of x and y changing in the for loop are what allow us to check for both color and position, since the x and y of the for loop correspond to every pixel, and thus "every" x and y coordinate
-                    g >= matchG - range && g <= matchG + range&& // 
-                    b >= matchB - range && b <= matchB + range &&
-                    x > xminthresh && x < xmaxthresh && y > yminthresh && y < ymaxthresh){ //using global variables defined earlier, we set the lmits of the region we want to search for our color within 
-                    return true
-                    return createVector(x,y); //return to stop the findColor from looking for other pixels matching the color 
-                    }
-                
-
-        }
+    
+   
+     // have the randomizer run once by clicking on or off a target
+    Targets.drawTarget();
+                        //Side note, having the target be drawn before randomizing its position was small but critical in making the code work. Another small thing i lost sleep over until i caught it. 
+                        //The target detection being in drawTarget, it was important to draw the target first (that is, set coordinates of the target because the variables that hold those values are undefined), and then randomize its position (thus giving the randomize fx something to randomize)
+    Targets.randomizer()
+    if (misslocation === 1){
+        mousepresstonotif = 0 //resetting the notification trigger
     }
+    
+    return false// using this to prevent default functionality of the mousePressed fx. At default, it messes with touches activating the next target properly. improves the issues with playing the game with touch, but doesnt solve the notification text eventually not appearing when playing with touch
 
-}
+  }
+
 
 
 
 class Target {
-    constructor(){
-        this.hg = 40// height of rectangle
-        this.wd = 30// width of rectangle
-        this.targetx = width - 40//x position
-        this.targety = height/2//y position
-        this.notifX = width - 40
-        this.notifY = height/2
-        this.fill = colorToFind // the color of the square is the color being tracked
-        this.notiftext;
-        this.notiftextr;
-        this.notiftextg;
-        this.notiftextb;
-        this.notiftextstrokeweight = 3
-        this.notiftextop = 255
-        this.textsize = 200
-    }
+  constructor(){
+      this.hg = 100// height of rectangle
+      this.wd = 80// width of rectangle
+      this.targetx ;//x position
+      this.targety ;//y position
+      this.notiftext;// text notification
+      this.textsize = 50 // text notification size
+  }
 
-    drawTarget1(){
-        hitTimer = millis() - currentTimeElapsed
-        print (hitTimer)
-        //we define the regions to find a color in by changing our universal threshold variables searching 
-        xminthresh = 590//
-        xmaxthresh = 640//searching for color on the right side
-        yminthresh = 200//
-        ymaxthresh = 250//
-        if (findColor(cam, colorToFind, colorrange) === true){// if the color we are looking has been found within the region on the right, we draw the square on the left
-            //fill(this.fill) // trying to set the color of the square to be the color being tracked, wont work somehow
-            rect (this.targetx, this.targety, this.wd, this.hg)
-            step = 1
-            print ("color found!");
-        }else if( step === 0){// otherwise if the page has just loaded, draw the square to the left only
-            rect (this.targetx, this.targety, this.wd, this.hg) 
-        }  
-    }
+drawTarget(){
+      hitTimer = 0
+      hitTimer = millis() - currentTimeElapsed //we create a timer that begins at 0 when the target is drawn
+      //print (hitTimer + ' hit timer') //use this to see the timer being reset on every click
+
+      //we define the regions to the target in in by changing our universal threshold variables 
+      xminthresh = this.targetx - 50//
+      xmaxthresh = this.targetx + 50//searching for mouse clicks on or around target
+      yminthresh = this.targety - 50//
+      ymaxthresh = this.targety + 50//
+      
+      
+     //  if the page has just loaded, draw target 
+          fill(255, 220, 0, 200)
+          rect (this.targetx, this.targety, this.wd, this.hg)
+          textSize(20) 
+          print(this.targetx + this.targety)
+          
+          
+
+      
+
+
+
+      if (mousepress === 1  || screentouch === 1){ //if the mouse is clicked or screen touched
+          if (mouseX > xminthresh && mouseX < xmaxthresh ){ //check if mouse position is within threshold on x axis
+              if(mouseY > yminthresh && mouseY < ymaxthresh ){//check if mouse position is within threshold on y axis
+                  
+                  
+                  if (hitTimer < 1000){// and if the target is touched within the time
+                     great =1 // activate the "great" text notification
+                      points++ //give a point
+                     
+                  }
+                  else if(hitTimer > 1000 ){ //if the target is touched outside of the allowed time
+                      misstime = 1// activate the "miss" text notification
+                      points-=1 //deduct a point
+              }
+          
+          } 
+          
+             
+          
+         
+          currentTimeElapsed = millis()// storing the current time elapsed value on every click allows for the timer to start at 0 every time a new target is drawn, since a new target is drawn every time we click
+
+          mousepress = 0 //resets the mouse press switch
+          screentouch = 0 //resets the screen touch switch
+          
+          
+      }
+      else{
+      //reset all triggers if we click outside the target 
+      mousepresstonotif = 0
+      mousepress = 0 // resetting both mousepress and screentouch in this else conditional seems to have fixed the messiness of the notifications appearing, i used to only reset the mousepresstonotif variable here. After 4 nights of trying everything and streamlining my code, this was the simple fix it seems.
+      screentouch = 0 
+     
+      
+      }
+
+  }
+}
+
+textgreatnotif(){
+if (great=== 1){
+  this.notiftext = 'GREAT!!' // set the text to great if the target is hit
+
+                      noStroke()
+                      fill(50, 255, 10,opacity) //setting the opacity in fill so that it can be made to fade by decreasing the variable's value below, and by being in draw
+                      textSize(this.textsize)
+                      text(this.notiftext, this.targetx, this.targety) //draw the text at the target location
+                      
+                      //print ('great text drawn')
+                      //print ("hit target"); // confirmations that the target was hit and its notification appeared
+                      
+                      
+                      
+                      opacity -=10 // since this is in draw, the opacity will lower
+                      
+                      
+                      if (opacity <= 0 ){
+                          great = 0
+                          mousepresstonotif = 0
+                          opacity = 255//resetting the switch  that activates the notification and its opacity on a mousepress, if the text disappears
+                          
+                      }
+                        
+}
+}
+
+textmissnotif(){
+if (misstime ===1){
+
+  this.notiftext = 'MISS...' // set the text to miss if the target is not hit
     
-    
-    drawTarget2(){
-        hitTimer = 0
-        hitTimer = millis() - currentTimeElapsed
-        print (hitTimer)
+  noStroke()
+  fill(255, 10, 50, opacity) //setting the opacity in fill so that it can be made to fade by decreasing the variable's value below, and by being in draw
+  textSize(this.textsize)
+  text(this.notiftext, this.targetx, this.targety)//draw the text at the target location
+  //print ('miss text drawn')// confirmation that the text was drawn
+  opacity -=10
+  
+  if (opacity <= 0  ){  
+      misstime = 0
+      mousepresstonotif = 0
+      opacity = 255//resetting the switch that activates the notification on a mousepress, if the text disappears
+      
+  }
+  
+ }  
  
-        xminthresh = 0//
-        xmaxthresh = 160// searching for color on the left
-        yminthresh = 200//
-        ymaxthresh = 250//
-
-        if (step === 1){ // if the first step has run, that is if the color was found on the right side, we draw the second square on the right
-            rect (this.targetx + 10 - width + 10, this.targety, this.wd )
-        }
-        
-        if (findColor(cam, colorToFind, colorrange) === true){ //if the color we are looking has been found within the region on the left, we return the step variable to 0, thus going back to the first step, running things as if the page had just loaded
-             step = 0
-        }
-    }
-    hitNotif(){
-        this.notiftext = 'HIT!'
-
-    }
-    greatNotif(){
-        this.notiftext = 'GREAT!!'
-        this.notiftextr = 50;
-        this.notiftextg = 255;
-        this.notiftextb = 10;
-        this.notiftextop = 255;
 
 
 
-        if (hitTimer < 2000){
-            stroke(this.notiftextr, this.notiftextg,this.notiftextb, this.notiftextop, )
-            text(this.notiftext, this.notifX, this.notifY)
-            // // // // // the text is also mirrored, gotta fix that
-            this.notiftextop -= 20
-            this.notifY -= 1
-        }
+
+if (misslocation === 1){// was unable to get this to work, but wanted to show my process for making a miss notification appear when the target is not hit. the logic is the same as the other notifications
+                      // misslocation, in mousePressed, only resets the mousepressnotif to 0 
+  this.notiftext = 'MISS...' 
+                 
+                  noStroke()
+                  fill(255, 10, 50, opacity)
+                  text(this.notiftext, this.targetx, this.targety)
+                 // print ('missed location text drawn')
+
+                  opacity -=10
+                  
+                  
+                  if (opacity <= 0 ){
+                      misslocation = 0
+                      mousepresstonotif = 0
+                      opacity = 255
+                      
+                  }
+                  
+}
+}
+ 
+// basically when we click, the draw target function checks the area where the target is, if the step we have reached activates said function. it checks to see if the mouse is within a region set around the target. then the next target in the sequence is drawn, and depending on where the mouse is when pressed, a number of things happen, like text displayed, particle effects 
 
 
-    }
-    missNotif(){
-        this.notiftext = 'MISS...'
-
-
-    }
+randomizer(){
+  this.targetx = random (100, 600)//x position
+  this.targety = random (100, 350)//y position
+  //print(this.targetx + 'targetx') //to see the new coordinates of the target
+  //print(this.targety + 'targety')
+}
 }
